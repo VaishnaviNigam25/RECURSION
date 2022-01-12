@@ -9,34 +9,39 @@ void print(vector<int> & ans)
 }
 void findComb(int i,int n,int arr[],int t,vector<int> &ans)
 {
-   if(i==n)
-   {
+   
     if(t==0)
     {
         print(ans);
-    }
+    
         return;
     }
     //if we pick the element
-    if(arr[i]<=t)
+    for(int ind=i;ind<n;ind++)
     {
-    ans.push_back(arr[i]);
-    findComb(i+1,n,arr,t-arr[i],ans);
+        if(ind>i && arr[ind]==arr[i])
+        continue;
+        if(arr[ind]>t)
+        break;
+        ans.push_back(arr[ind]);
+    findComb(ind+1,n,arr,t-arr[ind],ans);
     ans.pop_back();
     }
-    //if we donot pick the element
-     findComb(i+1,n,arr,t,ans);
-
+    
+  
+    
 }
 
 int main()
 {
     int t;
-    int arr[5]={2,3,2,4,7};
+    int arr[7]={10,1,2,7,6,1,5};
+    sort(arr,arr+7);
     cout<<"Enter Target";
+
     cin>>t;
     vector<int> ans;
-    findComb(0,5,arr,t,ans);
+    findComb(0,7,arr,t,ans);
 
 
     return 0;
